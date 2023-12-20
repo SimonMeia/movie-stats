@@ -6,18 +6,31 @@ export function useStatistics(movies: Ref<Movie[]>, year: Ref<number> = ref(2023
     movies.value.filter((movie: Movie) => movie.viewing_date.getFullYear() === year.value)
   )
 
-  const numberOfMoviesWatched = computed(() => sortedMovies.value.length)
+  const yearList = computed(() =>
+    Array.from(new Set(movies.value.map((movie: Movie) => movie.viewing_date.getFullYear()))).sort(
+      (a, b) => b - a
+    )
+  )
+
+  const numberOfMoviesWatched = computed(() =>
+    sortedMovies.value.length ? sortedMovies.value.length : undefined
+  )
 
   const longestMovie = computed(() => sortedMovies.value.sort((a, b) => b.runtime - a.runtime)[0])
 
   const shortestMovie = computed(() => sortedMovies.value.sort((a, b) => a.runtime - b.runtime)[0])
 
-  const averageMovieRuntime = computed(
-    () =>
-      sortedMovies.value
-        .map((movie: Movie) => movie.runtime)
-        .reduce((a: number, b: number) => a + b, 0) / sortedMovies.value.length
-  )
+  const averageMovieRuntime = computed(() => {
+    if (sortedMovies.value.length === 0) {
+      return undefined
+    } else {
+      return (
+        sortedMovies.value
+          .map((movie: Movie) => movie.runtime)
+          .reduce((a: number, b: number) => a + b, 0) / sortedMovies.value.length
+      )
+    }
+  })
 
   const mostRecentMovie = computed(() => {
     return sortedMovies.value.sort((a, b) => b.release_date.getTime() - a.release_date.getTime())[0]
@@ -151,6 +164,7 @@ export function useStatistics(movies: Ref<Movie[]>, year: Ref<number> = ref(2023
   })
 
   return {
+    yearList,
     numberOfMoviesWatched,
     longestMovie,
     shortestMovie,
