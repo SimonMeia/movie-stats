@@ -22,6 +22,7 @@ const year = ref('')
 watchEffect(() => {
   if (props.yearsList[0] && !init) {
     year.value = props.yearsList[0].toString()
+    emits('update', year.value)
     init = true
   }
 })

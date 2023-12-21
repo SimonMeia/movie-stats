@@ -1,4 +1,3 @@
-// useStatistics.ts
 import { ref, type Ref } from 'vue'
 import Papa from 'papaparse'
 import type { Movie } from '@/types/movie'
