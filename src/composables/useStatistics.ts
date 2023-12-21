@@ -1,6 +1,7 @@
 import type { Movie } from '@/types/movie'
 import { computed, type Ref } from 'vue'
 import { movies } from '@/store/store'
+import { getFormattedDuration } from '@/lib/display'
 
 export function useStatistics(year: Ref<string>) {
   const sortedMovies = computed(() => {
@@ -36,11 +37,11 @@ export function useStatistics(year: Ref<string>) {
     if (sortedMovies.value.length === 0) {
       return undefined
     } else {
-      return (
+      const average =
         sortedMovies.value
           .map((movie: Movie) => movie.runtime)
           .reduce((a: number, b: number) => a + b, 0) / sortedMovies.value.length
-      )
+      return getFormattedDuration(average)
     }
   })
 
