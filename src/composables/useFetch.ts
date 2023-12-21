@@ -1,10 +1,10 @@
 // useStatistics.ts
-import { ref, type Ref, onMounted } from 'vue'
+import { ref, type Ref } from 'vue'
 import Papa from 'papaparse'
 import type { Movie } from '@/types/movie'
+import { movies } from '@/store/store'
 
 export function useFetch() {
-  const movies: Ref<Movie[]> = ref([])
   const isLoading = ref(false)
   const isError = ref(false)
 
@@ -39,7 +39,6 @@ export function useFetch() {
           movie.producer = movie.producer.split(',').map((producer: string) => producer.trim())
           movie.tmdb_rating = parseInt(movie.tmdb_rating)
         })
-
         movies.value = results.data as Movie[]
         isLoading.value = false
       },
@@ -49,8 +48,7 @@ export function useFetch() {
       }
     })
   }
+  loadData()
 
-  onMounted(loadData)
-
-  return { movies, isLoading, isError }
+  // return { isLoading, isError }
 }

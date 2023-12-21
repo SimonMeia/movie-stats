@@ -9,11 +9,11 @@ const props = defineProps<{
 
 <template>
   <div>
-    <h2 class="text-md">
+    <h2 class="font-bold text-md text-primary">
       {{ label }}
     </h2>
     <p v-if="value" class="text-2xl">{{ value }}</p>
-    <p v-else><Skeleton class="w-full h-6 mb-2" /></p>
+    <p v-else><Skeleton class="w-full h-6" /></p>
   </div>
 </template>
 

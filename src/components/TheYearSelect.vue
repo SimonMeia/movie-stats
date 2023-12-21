@@ -10,18 +10,18 @@ import {
 import { Label } from '@/components/ui/label'
 
 const props = defineProps<{
-  years: number[]
+  yearsList: number[]
 }>()
 
 const emits = defineEmits({
-  update: (value: number) => true
+  update: (value: string) => true
 })
 let init = false
 const year = ref('')
 
 watchEffect(() => {
-  if (props.years[0] && !init) {
-    year.value = props.years[0].toString()
+  if (props.yearsList[0] && !init) {
+    year.value = props.yearsList[0].toString()
     init = true
   }
 })
@@ -30,12 +30,13 @@ watchEffect(() => {
 <template>
   <div>
     <Label for="year">Year</Label>
-    <Select id="year" v-model="year" @update:model-value="emits('update', parseInt($event))">
+    <Select id="year" v-model="year" @update:model-value="emits('update', $event)">
       <SelectTrigger>
         <SelectValue placeholder="Select a year" />
       </SelectTrigger>
       <SelectContent>
-        <SelectItem v-for="year in props.years" :key="year" :value="year.toString()">
+        <SelectItem value="all">All</SelectItem>
+        <SelectItem v-for="year in props.yearsList" :key="year" :value="year.toString()">
           {{ year }}
         </SelectItem>
       </SelectContent>

@@ -5,11 +5,9 @@ import { computed, ref, watchEffect } from 'vue'
 import SingleStatistic from '@/components/SingleStatistic.vue'
 
 const props = defineProps<{
-  year: number
-  movies: Movie[]
+  year: string
 }>()
 
-const movies = computed(() => props.movies)
 const year = computed(() => props.year)
 
 const {
@@ -19,11 +17,8 @@ const {
   averageMovieRuntime,
   mostOldMovie,
   mostRecentMovie
-} = useStatistics(movies, year)
+} = useStatistics(year)
 
-watchEffect(() => {
-  console.log(averageMovieRuntime.value)
-})
 </script>
 
 <template>

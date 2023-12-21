@@ -1,10 +1,16 @@
 import type { Movie } from '@/types/movie'
-import { computed, type Ref, ref } from 'vue'
+import { computed, type Ref } from 'vue'
+import { movies } from '@/store/store'
 
-export function useStatistics(movies: Ref<Movie[]>, year: Ref<number> = ref(2023)) {
-  const sortedMovies = computed(() =>
-    movies.value.filter((movie: Movie) => movie.viewing_date.getFullYear() === year.value)
-  )
+export function useStatistics(year: Ref<string>) {
+  const sortedMovies = computed(() => {
+    if (year.value === '' || year.value === 'all') {
+      return movies.value
+    }
+    return movies.value.filter(
+      (movie: Movie) => movie.viewing_date.getFullYear() === parseInt(year.value)
+    )
+  })
 
   const yearList = computed(() =>
     Array.from(new Set(movies.value.map((movie: Movie) => movie.viewing_date.getFullYear()))).sort(
@@ -16,9 +22,15 @@ export function useStatistics(movies: Ref<Movie[]>, year: Ref<number> = ref(2023
     sortedMovies.value.length ? sortedMovies.value.length : undefined
   )
 
-  const longestMovie = computed(() => sortedMovies.value.sort((a, b) => b.runtime - a.runtime)[0])
+  const longestMovie = computed(() => {
+    const lm = [...sortedMovies.value].sort((a, b) => b.runtime - a.runtime)[0]
+    return lm
+  })
 
-  const shortestMovie = computed(() => sortedMovies.value.sort((a, b) => a.runtime - b.runtime)[0])
+  const shortestMovie = computed(() => {
+    const sm = [...sortedMovies.value].sort((a, b) => a.runtime - b.runtime)[0]
+    return sm
+  })
 
   const averageMovieRuntime = computed(() => {
     if (sortedMovies.value.length === 0) {
@@ -33,11 +45,15 @@ export function useStatistics(movies: Ref<Movie[]>, year: Ref<number> = ref(2023
   })
 
   const mostRecentMovie = computed(() => {
-    return sortedMovies.value.sort((a, b) => b.release_date.getTime() - a.release_date.getTime())[0]
+    return [...sortedMovies.value].sort(
+      (a, b) => b.release_date.getTime() - a.release_date.getTime()
+    )[0]
   })
 
   const mostOldMovie = computed(() => {
-    return sortedMovies.value.sort((a, b) => a.release_date.getTime() - b.release_date.getTime())[0]
+    return [...sortedMovies.value].sort(
+      (a, b) => a.release_date.getTime() - b.release_date.getTime()
+    )[0]
   })
 
   const topMoviesGenres = computed(() => {
@@ -164,6 +180,7 @@ export function useStatistics(movies: Ref<Movie[]>, year: Ref<number> = ref(2023
   })
 
   return {
+    sortedMovies,
     yearList,
     numberOfMoviesWatched,
     longestMovie,

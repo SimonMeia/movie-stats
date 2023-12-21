@@ -1,15 +1,12 @@
 <script setup lang="ts">
 import { useStatistics } from '@/composables/useStatistics'
-import type { Movie } from '@/types/movie'
-import { computed } from 'vue'
 import Top from '@/components/Top.vue'
+import { computed } from 'vue'
 
 const props = defineProps<{
-  year: number
-  movies: Movie[]
+  year: string
 }>()
 
-const movies = computed(() => props.movies)
 const year = computed(() => props.year)
 
 const {
@@ -20,7 +17,7 @@ const {
   topMonths,
   topPartners,
   topPlaces
-} = useStatistics(movies, year)
+} = useStatistics(year)
 </script>
 
 <template>
