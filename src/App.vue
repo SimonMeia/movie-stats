@@ -15,14 +15,16 @@ const { yearList } = useStatistics(yearSelected)
 </script>
 
 <template>
-  <header class="container mx-auto my-8">
-    <h1 class="text-3xl font-bold">Watchlist Stats</h1>
-    <TheYearSelect :years-list="yearList" @update="yearSelected = $event" class="mb-2" />
-  </header>
+  <div class="container mx-auto my-8">
+    <header>
+      <h1 class="text-3xl font-bold">Watchlist Stats</h1>
+      <TheYearSelect :years-list="yearList" @update="yearSelected = $event" class="mb-2" />
+    </header>
 
-  <main class="container mx-auto">
-    <TheStatistics :year="yearSelected" />
-  </main>
+    <main>
+      <TheStatistics :year="yearSelected" />
+    </main>
+  </div>
 </template>
 
 <style scoped></style>
