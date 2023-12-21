@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { useStatistics } from '@/composables/useStatistics'
 import Top from '@/components/Top.vue'
 import { computed } from 'vue'
+import { useTopStatistics } from '@/composables/useTopStatistics'
 
 const props = defineProps<{
   year: string
@@ -17,7 +17,7 @@ const {
   topMonths,
   topPartners,
   topPlaces
-} = useStatistics(year)
+} = useTopStatistics(year)
 </script>
 
 <template>

@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import TheStatistics from '@/components/TheStatistics.vue'
 import { useFetch } from './composables/useFetch'
-import { useStatistics } from './composables/useStatistics'
-import { onMounted, ref, watchEffect } from 'vue'
+import { onMounted, ref } from 'vue'
 import TheYearSelect from './components/TheYearSelect.vue'
+import { useMovies } from './composables/useMovies'
 
 const yearSelected = ref('')
 
@@ -11,7 +11,7 @@ onMounted(() => {
   useFetch()
 })
 
-const { yearList } = useStatistics(yearSelected)
+const { yearList } = useMovies(yearSelected)
 </script>
 
 <template>
