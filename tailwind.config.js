@@ -8,6 +8,10 @@ module.exports = {
     './src/**/*.{ts,tsx,vue}',
   ],
 
+  fontFamily: {
+    'pally': ["Pally-Variable", "sans-serif"],
+  },
+
   theme: {
     container: {
       center: true,
@@ -16,8 +20,8 @@ module.exports = {
         'sm': '640px',
         'md': '768px',
         'lg': '1024px',
-        // 'xl': '1280px',
-        // '2xl': '1536px',
+        'xl': '1280px',
+        '2xl': '1536px',
       },
     },
     extend: {
