@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Skeleton } from './ui/skeleton'
+import { Skeleton } from '@/components/ui/skeleton'
 
 const props = defineProps<{
   label: string

@@ -7,7 +7,7 @@ import {
   SelectTrigger,
   SelectValue
 } from '@/components/ui/select'
-import { Label } from '@/components/ui/label'
+import { selectedYear } from '@/store/store'
 
 const props = defineProps<{
   yearsList: number[]
@@ -17,12 +17,10 @@ const emits = defineEmits({
   update: (value: string) => true
 })
 let init = false
-const year = ref('')
 
 watchEffect(() => {
   if (props.yearsList[0] && !init) {
-    year.value = props.yearsList[0].toString()
-    emits('update', year.value)
+    selectedYear.value = props.yearsList[0].toString()
     init = true
   }
 })
@@ -30,8 +28,7 @@ watchEffect(() => {
 
 <template>
   <div>
-    <Label for="year">Year</Label>
-    <Select id="year" v-model="year" @update:model-value="emits('update', $event)">
+    <Select id="year" v-model="selectedYear" @update:model-value="selectedYear = $event">
       <SelectTrigger>
         <SelectValue placeholder="Select a year" />
       </SelectTrigger>

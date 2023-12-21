@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import Top from '@/components/Top.vue'
+import Top from '@/components/statistics/Top.vue'
 import { computed } from 'vue'
 import { useTopStatistics } from '@/composables/useTopStatistics'
 

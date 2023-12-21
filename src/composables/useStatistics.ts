@@ -3,8 +3,8 @@ import { computed, type Ref } from 'vue'
 import { getFormattedDuration } from '@/lib/display'
 import { useMovies } from './useMovies'
 
-export function useStatistics(year: Ref<string>) {
-  const { sortedMovies } = useMovies(year)
+export function useStatistics() {
+  const { sortedMovies } = useMovies()
 
   const numberOfMoviesWatched = computed(() =>
     sortedMovies.value.length ? sortedMovies.value.length : undefined

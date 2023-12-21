@@ -1,14 +1,15 @@
 import { movies } from '@/store/store'
 import type { Movie } from '@/types/movie'
 import { computed, type Ref } from 'vue'
+import { selectedYear } from '@/store/store'
 
-export function useMovies(year: Ref<string>) {
+export function useMovies() {
   const sortedMovies = computed(() => {
-    if (year.value === '' || year.value === 'all') {
+    if (selectedYear.value === '' || selectedYear.value === 'all') {
       return movies.value
     }
     return movies.value.filter(
-      (movie: Movie) => movie.viewing_date.getFullYear() === parseInt(year.value)
+      (movie: Movie) => movie.viewing_date.getFullYear() === parseInt(selectedYear.value)
     )
   })
 

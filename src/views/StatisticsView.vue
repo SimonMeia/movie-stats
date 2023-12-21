@@ -1,25 +1,28 @@
 <script setup lang="ts">
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import TheSingleStats from './TheSingleStats.vue'
-import TheTopStats from './TheTopStats.vue'
+import TheSingleStats from '@/components/statistics/TheSingleStats.vue'
+import TheTopStats from '@/components/statistics/TheTopStats.vue'
 import { computed, watchEffect } from 'vue'
+import { selectedYear } from '@/store/store'
+import TheYearSelect from '@/components/TheYearSelect.vue'
+import { useMovies } from '@/composables/useMovies'
 
-const props = defineProps<{ year: string }>()
-
+const { yearList } = useMovies(selectedYear)
 </script>
 
 <template>
   <div>
+    <TheYearSelect :years-list="yearList" class="mb-2" />
     <Tabs default-value="single" class="w-full">
       <TabsList class="w-full">
         <TabsTrigger class="w-1/2" value="single"> Single </TabsTrigger>
         <TabsTrigger class="w-1/2" value="tops"> Tops </TabsTrigger>
       </TabsList>
       <TabsContent value="single">
-        <TheSingleStats :year="year" />
+        <TheSingleStats :year="selectedYear" />
       </TabsContent>
       <TabsContent value="tops">
-        <TheTopStats :year="year" />
+        <TheTopStats :year="selectedYear" />
       </TabsContent>
     </Tabs>
   </div>
