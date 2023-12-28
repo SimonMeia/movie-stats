@@ -2,8 +2,8 @@ import type { Movie } from '@/types/movie'
 import { computed, type Ref } from 'vue'
 import { useMovies } from './useMovies'
 
-export function useTopStatistics(year: Ref<string>) {
-  const { sortedMovies } = useMovies(year)
+export function useTopStatistics() {
+  const { sortedMovies } = useMovies()
 
   const topMoviesGenres = computed(() => {
     const genres: { name: string; numberOfMovies: number }[] = []
@@ -96,14 +96,14 @@ export function useTopStatistics(year: Ref<string>) {
   })
 
   const topMonths = computed(() => {
-    const months: { name: string; numberOfMovies: number }[] = []
+    const months: { monthName: string; monthId: number; numberOfMovies: number }[] = []
 
     sortedMovies.value.forEach((movie: Movie) => {
       const month = movie.viewing_date.toLocaleString('fr-FR', { month: 'long' })
-      const monthIndex = months.findIndex((m) => m.name === month)
+      const monthIndex = months.findIndex((m) => m.monthName === month)
 
       if (monthIndex === -1) {
-        months.push({ name: month, numberOfMovies: 1 })
+        months.push({ monthName: month, monthId: movie.viewing_date.getMonth(), numberOfMovies: 1 })
       } else {
         months[monthIndex].numberOfMovies++
       }

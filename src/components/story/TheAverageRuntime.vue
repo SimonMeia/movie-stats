@@ -3,7 +3,6 @@ import { computed, watchEffect } from 'vue'
 
 const props = defineProps<{
   runtime: string
-  label: string
 }>()
 
 const splitedRuntime = computed(() => props.runtime.split(' '))

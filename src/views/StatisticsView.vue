@@ -7,11 +7,11 @@ import { selectedYear } from '@/store/store'
 import TheYearSelect from '@/components/TheYearSelect.vue'
 import { useMovies } from '@/composables/useMovies'
 
-const { yearList } = useMovies(selectedYear)
+const { yearList } = useMovies()
 </script>
 
 <template>
-  <div>
+  <main class="container">
     <TheYearSelect :years-list="yearList" class="mb-2" />
     <Tabs default-value="single" class="w-full">
       <TabsList class="w-full">
@@ -25,7 +25,7 @@ const { yearList } = useMovies(selectedYear)
         <TheTopStats :year="selectedYear" />
       </TabsContent>
     </Tabs>
-  </div>
+  </main>
 </template>
 
 <style scoped></style>
