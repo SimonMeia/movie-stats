@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Skeleton } from '@/components/ui/skeleton'
+import { computed } from 'vue';
 
 const props = defineProps<{
   name: string
@@ -8,6 +9,7 @@ const props = defineProps<{
   numberToDisplay?: number
 }>()
 
+const data = computed(() => props.data)
 const numberToDisplay = props.numberToDisplay ?? 3
 </script>
 

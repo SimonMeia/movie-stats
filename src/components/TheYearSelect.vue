@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, watchEffect } from 'vue'
+import { watchEffect } from 'vue'
 import {
   Select,
   SelectContent,
@@ -13,9 +13,6 @@ const props = defineProps<{
   yearsList: number[]
 }>()
 
-const emits = defineEmits({
-  update: (value: string) => true
-})
 let init = false
 
 watchEffect(() => {

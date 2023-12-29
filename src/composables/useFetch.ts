@@ -1,4 +1,4 @@
-import { ref, type Ref } from 'vue'
+import { ref } from 'vue'
 import Papa from 'papaparse'
 import type { Movie } from '@/types/movie'
 import { movies } from '@/store/store'

@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { VisXYContainer, VisGroupedBar, VisAxis } from '@unovis/vue'
-import type { Movie } from '@/types/movie'
 import { computed, ref, watchEffect } from 'vue'
 import { getShortMonth } from '@/lib/dates'
 

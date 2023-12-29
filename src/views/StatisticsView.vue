@@ -2,7 +2,6 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import TheSingleStats from '@/components/statistics/TheSingleStats.vue'
 import TheTopStats from '@/components/statistics/TheTopStats.vue'
-import { computed, watchEffect } from 'vue'
 import { selectedYear } from '@/store/store'
 import TheYearSelect from '@/components/TheYearSelect.vue'
 import { useMovies } from '@/composables/useMovies'

@@ -1,6 +1,6 @@
 import { movies } from '@/store/store'
 import type { Movie } from '@/types/movie'
-import { computed, type Ref } from 'vue'
+import { computed } from 'vue'
 import { selectedYear } from '@/store/store'
 
 export function useMovies() {

@@ -1,5 +1,5 @@
 import type { Movie } from '@/types/movie'
-import { computed, type Ref } from 'vue'
+import { computed } from 'vue'
 import { getFormattedDuration } from '@/lib/display'
 import { useMovies } from './useMovies'
 

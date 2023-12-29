@@ -1,5 +1,5 @@
 import type { Movie } from '@/types/movie'
-import { computed, type Ref } from 'vue'
+import { computed } from 'vue'
 import { useMovies } from './useMovies'
 
 export function useTopStatistics() {
@@ -7,7 +7,6 @@ export function useTopStatistics() {
 
   const topMoviesGenres = computed(() => {
     const genres: { name: string; numberOfMovies: number }[] = []
-
     sortedMovies.value.forEach((movie: Movie) => {
       movie.genre.forEach((movieGenre: string) => {
         const genreIndex = genres.findIndex((g) => g.name === movieGenre)

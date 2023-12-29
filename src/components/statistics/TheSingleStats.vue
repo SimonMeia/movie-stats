@@ -1,13 +1,6 @@
 <script setup lang="ts">
 import { useStatistics } from '@/composables/useStatistics'
-import { computed } from 'vue'
 import SingleStatistic from '@/components/statistics/SingleStatistic.vue'
-
-const props = defineProps<{
-  year: string
-}>()
-
-const year = computed(() => props.year)
 
 const {
   numberOfMoviesWatched,
@@ -16,8 +9,7 @@ const {
   averageMovieRuntime,
   mostOldMovie,
   mostRecentMovie
-} = useStatistics(year)
-
+} = useStatistics()
 </script>
 
 <template>
@@ -25,7 +17,10 @@ const {
     <SingleStatistic label="movies watched" :value="numberOfMoviesWatched?.toString()" />
     <SingleStatistic label="was the longest movie" :value="longestMovie?.name_french" />
     <SingleStatistic label="was the shortest movie" :value="shortestMovie?.name_french" />
-    <SingleStatistic label="is the average movie duration" :value="averageMovieRuntime?.toString()" />
+    <SingleStatistic
+      label="is the average movie duration"
+      :value="averageMovieRuntime?.toString()"
+    />
     <SingleStatistic label="is the most recent movie seen" :value="mostRecentMovie?.name_french" />
     <SingleStatistic label="is the most old movie seen" :value="mostOldMovie?.name_french" />
   </div>

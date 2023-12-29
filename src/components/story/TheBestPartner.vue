@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { VisXYContainer, VisGroupedBar, VisAxis } from '@unovis/vue'
-import { computed, ref, watchEffect } from 'vue'
-import { getShortMonth } from '@/lib/dates'
+import { ref, watchEffect } from 'vue'
 
 const props = defineProps<{
   topPartners: { name: string; numberOfMovies: number }[]
@@ -10,7 +9,6 @@ const props = defineProps<{
 type DataRecord = { numberOfMoviesWatched: number; partnerId: number; partnerName: string }
 const data = ref<DataRecord[]>([])
 
-const max = ref(0)
 const numberOfPartnerToDisplay = 3
 
 watchEffect(() => {

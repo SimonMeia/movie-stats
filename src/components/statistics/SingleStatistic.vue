@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { Skeleton } from '@/components/ui/skeleton'
 
-const props = defineProps<{
+defineProps<{
   label: string
   value?: string
 }>()

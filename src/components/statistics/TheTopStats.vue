@@ -1,13 +1,6 @@
 <script setup lang="ts">
-import Top from '@/components/statistics/Top.vue'
-import { computed } from 'vue'
+import TopStatistics from '@/components/statistics/TopStatistics.vue'
 import { useTopStatistics } from '@/composables/useTopStatistics'
-
-const props = defineProps<{
-  year: string
-}>()
-
-const year = computed(() => props.year)
 
 const {
   topActors,
@@ -17,18 +10,21 @@ const {
   topMonths,
   topPartners,
   topPlaces
-} = useTopStatistics(year)
+} = useTopStatistics()
 </script>
 
 <template>
   <div class="grid grid-cols-1 gap-4 lg:grid-cols-2">
-    <Top :data="topMoviesGenres" name="genres" />
-    <Top :data="topActors" name="actors" />
-    <Top :data="topPlaces" name="places" />
-    <Top :data="topPartners" name="partners" />
-    <Top :data="topDirectors" name="directors" />
-    <Top :data="topMonths" name="months" />
-    <Top :data="topCountries" name="country of origin" />
+    <TopStatistics :data="topMoviesGenres" name="genres" />
+    <TopStatistics :data="topActors" name="actors" />
+    <TopStatistics :data="topPlaces" name="places" />
+    <TopStatistics :data="topPartners" name="partners" />
+    <TopStatistics :data="topDirectors" name="directors" />
+    <TopStatistics
+      :data="topMonths.map((m) => ({ name: m.monthName, numberOfMovies: m.numberOfMovies }))"
+      name="months"
+    />
+    <TopStatistics :data="topCountries" name="country of origin" />
   </div>
 </template>
 

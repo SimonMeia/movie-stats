@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { VisXYContainer, VisLine, VisAxis, VisBulletLegend } from '@unovis/vue'
-import { computed, ref, watchEffect } from 'vue'
+import { ref, watchEffect } from 'vue'
 import { getShortMonth } from '@/lib/dates'
 import type { Movie } from '@/types/movie'
 
