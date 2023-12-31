@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { VisSingleContainer, VisNestedDonut } from '@unovis/vue'
+import { NestedDonut } from '@unovis/ts';
+import { VisSingleContainer, VisNestedDonut, VisTooltip } from '@unovis/vue'
 import { computed } from 'vue'
 
 const props = defineProps<{
@@ -18,6 +19,11 @@ const data = computed(() => {
   return array
 })
 
+const triggers = {
+  [NestedDonut.selectors.segment]: (d: any) =>
+    `<span>${d.data.key} - ${d.data.values.length}</span>`
+}
+
 const layers = [(d: string) => d]
 </script>
 
@@ -28,17 +34,13 @@ const layers = [(d: string) => d]
     </p>
     <VisSingleContainer :data="data" class="my-12">
       <VisNestedDonut :layers="layers" />
+      <VisTooltip :triggers="triggers" />
     </VisSingleContainer>
     <div class="text-sm text-center">
       <p>
         your favourite partner is
-        <span class="text-xl font-bold">{{ topPartners[0].name }}</span> with
+        <p class="text-xl font-bold">{{ topPartners[0].name }}</p> with
         <span class="text-xl font-bold">{{ topPartners[0].numberOfMovies }}</span> movies
-      </p>
-      <p>
-        followed by
-        <span class="text-xl font-bold">{{ topPartners[1].name }}</span> with
-        <span class="text-xl font-bold">{{ topPartners[1].numberOfMovies }}</span> movies
       </p>
     </div>
   </div>
