@@ -88,7 +88,7 @@ watchEffect(() => {
     </div>
   </div>
   <div class="absolute left-0 w-full text-center bottom-8">
-    Average grade: {{ formatGrade(averageGrade) }} / 100
+    Average grade: <span class="text-xl font-bold">{{ formatGrade(averageGrade) }} / 100</span>
   </div>
 </template>
 
