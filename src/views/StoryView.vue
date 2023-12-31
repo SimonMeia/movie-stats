@@ -5,19 +5,20 @@ import TheMonthsViewings from '@/components/story/TheMonthsViewings.vue'
 import TheAverageRuntime from '@/components/story/TheAverageRuntime.vue'
 import TheLongestShortest from '@/components/story/TheLongestShortest.vue'
 import TheBestPartner from '@/components/story/TheBestPartner.vue'
+import TheBestPlace from '@/components/story/TheBestPlace.vue'
 import { Button } from '@/components/ui/button'
 import { ref } from 'vue'
 import { useStatistics } from '@/composables/useStatistics'
 import { selectedYear } from '@/store/store'
 import { useTopStatistics } from '@/composables/useTopStatistics'
+import type TheBestPlaceVue from '@/components/story/TheBestPlace.vue'
 
 const { numberOfMoviesWatched, averageMovieRuntime, longestMovie, shortestMovie } = useStatistics()
-const { topMonths, topPartners, topGenres } = useTopStatistics()
-const { sortedMovies } = useStatistics()
+const { topMonths, topPartners, topGenres, topPlaces } = useTopStatistics()
 
 selectedYear.value = new Date().getFullYear().toString()
 
-const step = ref(2)
+const step = ref(7)
 </script>
 
 <template>
@@ -52,6 +53,7 @@ const step = ref(2)
         v-if="step === 6 && topPartners.length !== 0"
         :top-partners="topPartners"
       ></TheBestPartner>
+      <TheBestPlace v-if="step === 7 && topPlaces.length !== 0" :top-places="topPlaces" />
     </div>
   </main>
 </template>
