@@ -46,7 +46,7 @@ export function useTopStatistics() {
     sortedMovies.value.forEach((movie: Movie) => {
       movie.watch_partner.forEach((partner: string) => {
         if (partner === '-') {
-          partner = 'Tout seul'
+          partner = 'Alone'
         }
         const partnerIndex = partners.findIndex((p) => p.name === partner)
 

@@ -1,13 +1,13 @@
 export function getShortMonth(monthNumber: number): string | null {
   const monthsShort = [
     'jan',
-    'fev',
+    'feb',
     'mar',
-    'avr',
+    'apr',
     'mai',
     'jun',
-    'jui',
-    'aou',
+    'jul',
+    'aug',
     'sep',
     'oct',
     'nov',
