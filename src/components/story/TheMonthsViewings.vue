@@ -54,7 +54,7 @@ const y = (data: DataRecord) => data.numberOfMoviesWatched
         :gridLine="false"
         :domainLine="false"
       />
-      <VisAxis type="x" :numTicks="max" :domainLine="false" />
+      <VisAxis type="x" :numTicks="max / 2" :domainLine="false" />
     </VisXYContainer>
   </div>
 </template>
