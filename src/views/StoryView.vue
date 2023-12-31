@@ -4,7 +4,7 @@ import TheNumberOfMovies from '@/components/story/TheNumberOfMovies.vue'
 import TheAverageRuntime from '@/components/story/TheAverageRuntime.vue'
 import TheLongestShortest from '@/components/story/TheLongestShortest.vue'
 import TheBestPartner from '@/components/story/TheBestPartner.vue'
-import TheBestPartnerComparison from '@/components/story/TheBestPartnerComparison.vue'
+import TheBestPartnerComparison from '@/components/TheBestPartnerComparison.vue'
 import { Button } from '@/components/ui/button'
 import { ref } from 'vue'
 import { useStatistics } from '@/composables/useStatistics'
@@ -12,7 +12,7 @@ import { selectedYear } from '@/store/store'
 import { useTopStatistics } from '@/composables/useTopStatistics'
 
 const { numberOfMoviesWatched, averageMovieRuntime, longestMovie, shortestMovie } = useStatistics()
-const { topMonths, topPartners } = useTopStatistics()
+const { topMonths, topPartners, topGenres } = useTopStatistics()
 const { sortedMovies } = useStatistics()
 
 selectedYear.value = new Date().getFullYear().toString()

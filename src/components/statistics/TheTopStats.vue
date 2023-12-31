@@ -2,20 +2,13 @@
 import TopStatistics from '@/components/statistics/TopStatistics.vue'
 import { useTopStatistics } from '@/composables/useTopStatistics'
 
-const {
-  topActors,
-  topCountries,
-  topDirectors,
-  topMoviesGenres,
-  topMonths,
-  topPartners,
-  topPlaces
-} = useTopStatistics()
+const { topActors, topCountries, topDirectors, topGenres, topMonths, topPartners, topPlaces } =
+  useTopStatistics()
 </script>
 
 <template>
   <div class="grid grid-cols-1 gap-4 lg:grid-cols-2">
-    <TopStatistics :data="topMoviesGenres" name="genres" />
+    <TopStatistics :data="topGenres" name="genres" />
     <TopStatistics :data="topActors" name="actors" />
     <TopStatistics :data="topPlaces" name="places" />
     <TopStatistics :data="topPartners" name="partners" />

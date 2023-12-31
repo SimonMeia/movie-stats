@@ -5,7 +5,7 @@ import { useMovies } from './useMovies'
 export function useTopStatistics() {
   const { sortedMovies } = useMovies()
 
-  const topMoviesGenres = computed(() => {
+  const topGenres = computed(() => {
     const genres: { name: string; numberOfMovies: number }[] = []
     sortedMovies.value.forEach((movie: Movie) => {
       movie.genre.forEach((movieGenre: string) => {
@@ -128,7 +128,7 @@ export function useTopStatistics() {
   })
 
   return {
-    topMoviesGenres,
+    topGenres,
     topPlaces,
     topPartners,
     topActors,
