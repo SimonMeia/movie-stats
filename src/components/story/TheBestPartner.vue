@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { NestedDonut } from '@unovis/ts';
+import { NestedDonut } from '@unovis/ts'
 import { VisSingleContainer, VisNestedDonut, VisTooltip } from '@unovis/vue'
 import { computed } from 'vue'
 
@@ -37,10 +37,12 @@ const layers = [(d: string) => d]
       <VisTooltip :triggers="triggers" />
     </VisSingleContainer>
     <div class="text-sm text-center">
+      <p>but your favourite movie partner is</p>
+      <p class="text-xl font-bold">{{ topPartners[0].name }}</p>
       <p>
-        your favourite partner is
-        <p class="text-xl font-bold">{{ topPartners[0].name }}</p> with
-        <span class="text-xl font-bold">{{ topPartners[0].numberOfMovies }}</span> movies
+        you watched
+        <span class="text-xl font-bold">{{ topPartners[0].numberOfMovies }}</span>
+        movies together
       </p>
     </div>
   </div>

@@ -30,17 +30,19 @@ const layers = [(d: string) => d]
 <template>
   <div class="">
     <p class="text-sm text-center">
-      you watched movies with <span class="text-xl font-bold">{{ numberOfGenres }}</span> partners
+      you explored <span class="text-xl font-bold">{{ numberOfGenres }}</span> genres
     </p>
     <VisSingleContainer :data="data" class="my-12">
       <VisNestedDonut :layers="layers" />
       <VisTooltip :triggers="triggers" />
     </VisSingleContainer>
     <div class="text-sm text-center">
+      <p>but your prefered is</p>
+      <p class="text-xl font-bold">{{ topGenres[0].name }}</p>
       <p>
-        your favourite genre is
-        <p class="text-xl font-bold">{{ topGenres[0].name }}</p> with
-        <span class="text-xl font-bold">{{ topGenres[0].numberOfMovies }}</span> movies
+        you watched
+        <span class="text-xl font-bold">{{ topGenres[0].numberOfMovies }}</span>
+        movies of that type
       </p>
     </div>
   </div>
