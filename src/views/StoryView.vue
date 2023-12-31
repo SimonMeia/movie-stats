@@ -7,6 +7,7 @@ import TheLongestShortest from '@/components/story/TheLongestShortest.vue'
 import TheBestPartner from '@/components/story/TheBestPartner.vue'
 import TheBestPlace from '@/components/story/TheBestPlace.vue'
 import TheGrades from '@/components/story/TheGrades.vue'
+import TheBestMovies from '@/components/story/TheBestMovies.vue'
 import { Button } from '@/components/ui/button'
 import { ref } from 'vue'
 import { useStatistics } from '@/composables/useStatistics'
@@ -20,7 +21,7 @@ const { sortedMovies } = useMovies()
 
 selectedYear.value = new Date().getFullYear().toString()
 
-const step = ref(8)
+const step = ref(9)
 </script>
 
 <template>
@@ -57,6 +58,7 @@ const step = ref(8)
       ></TheBestPartner>
       <TheBestPlace v-if="step === 7 && topPlaces.length !== 0" :top-places="topPlaces" />
       <TheGrades v-if="step === 8 && sortedMovies.length !== 0" :movies="sortedMovies" />
+      <TheBestMovies v-if="step === 9 && sortedMovies.length !== 0" :movies="sortedMovies" />
     </div>
   </main>
 </template>
