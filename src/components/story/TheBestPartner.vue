@@ -26,7 +26,7 @@ const layers = [(d: string) => d]
     <p class="text-sm text-center">
       you watched movies with <span class="text-xl font-bold">{{ numberOfPartners }}</span> partners
     </p>
-    <VisSingleContainer :data="data" class="my-8">
+    <VisSingleContainer :data="data" class="my-12">
       <VisNestedDonut :layers="layers" />
     </VisSingleContainer>
     <div class="text-sm text-center">
