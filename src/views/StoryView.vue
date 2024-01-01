@@ -9,7 +9,7 @@ import TheBestPlace from '@/components/story/TheBestPlace.vue'
 import TheGrades from '@/components/story/TheGrades.vue'
 import TheBestMovies from '@/components/story/TheBestMovies.vue'
 import { Button } from '@/components/ui/button'
-import { ref } from 'vue'
+import { ref, watchEffect } from 'vue'
 import { useStatistics } from '@/composables/useStatistics'
 import { selectedYear } from '@/store/store'
 import { useTopStatistics } from '@/composables/useTopStatistics'
@@ -19,9 +19,12 @@ const { numberOfMoviesWatched, averageMovieRuntime, longestMovie, shortestMovie 
 const { topMonths, topPartners, topGenres, topPlaces } = useTopStatistics()
 const { sortedMovies } = useMovies()
 
-selectedYear.value = new Date().getFullYear().toString()
+// selectedYear.value = new Date().getFullYear().toString()
+selectedYear.value = '2023'
 
-const step = ref(9)
+watchEffect(() => console.log(sortedMovies.value))
+
+const step = ref(1)
 </script>
 
 <template>

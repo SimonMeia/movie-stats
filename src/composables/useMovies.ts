@@ -19,5 +19,9 @@ export function useMovies() {
     )
   )
 
-  return { sortedMovies, yearList }
+  function getMovieWatchInYear(year: number) {
+    return movies.value.filter((movie: Movie) => movie.viewing_date.getFullYear() === year)
+  }
+
+  return { sortedMovies, yearList, getMovieWatchInYear }
 }

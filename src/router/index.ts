@@ -1,3 +1,4 @@
+import GraphView from '@/views/GraphView.vue'
 import HomeView from '@/views/HomeView.vue'
 import StatisticsView from '@/views/StatisticsView.vue'
 import StoryView from '@/views/StoryView.vue'
@@ -20,6 +21,11 @@ const router = createRouter({
       path: '/story',
       name: 'story',
       component: StoryView
+    },
+    {
+      path: '/graphs',
+      name: 'graphs',
+      component: GraphView
     }
   ]
 })
