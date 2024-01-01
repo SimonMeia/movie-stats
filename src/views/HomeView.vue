@@ -5,9 +5,9 @@ const router = useRouter()
 </script>
 
 <template>
-  <main class="container">
-    <div class="flex flex-col justify-center">
-      <h1 class="text-3xl font-bold text-center">Watchlist Stats</h1>
+  <main class="container h-dvh flex flex-col justify-center items-center">
+    <div class="flex flex-col md:w-96 w-full">
+      <h1 class="text-3xl font-bold text-center mb-4">Watchlist Stats</h1>
       <Button class="w-full mb-2" @click="router.push({ name: 'story' })">
         Start the rewind
       </Button>

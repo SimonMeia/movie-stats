@@ -79,11 +79,14 @@ watchEffect(() => {
 
 <template>
   <div class="flex flex-col items-center w-full gap-4">
+    <p class="text-sm text-center">The average grades in each category are</p>
     <div v-for="category in data" :key="category.name" class="w-full">
       <div class="text-sm">{{ category.name }}</div>
       <div class="flex flex-row items-center w-full gap-4">
         <Progress :model-value="(category.grade * 100) / category.maxGrade" class="w-full" />
-        <div class="text-right shrink-0">{{ formatGrade(category.grade) }} / {{ category.maxGrade }}</div>
+        <div class="text-right shrink-0">
+          {{ formatGrade(category.grade) }} / {{ category.maxGrade }}
+        </div>
       </div>
     </div>
   </div>
