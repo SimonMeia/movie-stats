@@ -9,11 +9,12 @@ import TheBestPlace from '@/components/story/TheBestPlace.vue'
 import TheGrades from '@/components/story/TheGrades.vue'
 import TheBestMovies from '@/components/story/TheBestMovies.vue'
 import { Button } from '@/components/ui/button'
-import { ref, watchEffect } from 'vue'
+import { computed, onBeforeUnmount, onMounted, ref, watchEffect } from 'vue'
 import { useStatistics } from '@/composables/useStatistics'
 import { selectedYear } from '@/store/store'
 import { useTopStatistics } from '@/composables/useTopStatistics'
 import { useMovies } from '@/composables/useMovies'
+import router from '@/router'
 
 const { numberOfMoviesWatched, averageMovieRuntime, longestMovie, shortestMovie } = useStatistics()
 const { topMonths, topPartners, topGenres, topPlaces } = useTopStatistics()
@@ -21,18 +22,97 @@ const { sortedMovies } = useMovies()
 
 // selectedYear.value = new Date().getFullYear().toString()
 selectedYear.value = '2023'
-
-watchEffect(() => console.log(sortedMovies.value))
-
+let timer = ref(0)
+const isTimerRunning = ref(false)
+const graphDuration = ref(6000)
+const graphAdvancement = computed(() => (timer.value * 100) / graphDuration.value)
 const step = ref(1)
+
+let timerInterval = ref<NodeJS.Timeout | undefined>(undefined)
+
+function move(direction: 'forward' | 'back') {
+  if (direction === 'forward') {
+    if (step.value === 9) {
+      router.push({ name: 'home' })
+    } else {
+      step.value++
+    }
+  } else {
+    if (step.value === 1) {
+      router.push({ name: 'home' })
+    } else {
+      step.value--
+    }
+  }
+  timer.value = 0
+}
+
+onMounted(() => {
+  startTimer()
+})
+
+onBeforeUnmount(() => {
+  stopTimer()
+})
+
+function startTimer() {
+  timerInterval.value = setInterval(() => {
+    if (timer.value >= graphDuration.value) {
+      step.value++
+      timer.value = 0
+    } else {
+      timer.value += 10
+    }
+  }, 10)
+  isTimerRunning.value = true
+}
+function stopTimer() {
+  if (!isTimerRunning.value) return
+  clearInterval(timerInterval.value)
+  isTimerRunning.value = false
+}
 </script>
 
 <template>
   <main class="container h-dvh">
-    <div class="absolute z-50 top-4 right-4">
+    <div>
+      <div
+        class="absolute top-0 left-0 h-full w-1/2"
+        @click="move('back')"
+        @pointerdown="stopTimer"
+        @pointerup="startTimer"
+      ></div>
+      <div
+        class="absolute top-0 right-0 h-full w-1/2"
+        @click="move('forward')"
+        @pointerdown="stopTimer"
+        @pointerup="startTimer"
+      ></div>
+    </div>
+    <!-- <div class="absolute top-4 right-4">
+      <span
+        class="material-symbols-outlined text-gray-300"
+        v-if="!isTimerRunning"
+        @click="startTimer"
+      >
+        play_arrow
+      </span>
+      <span
+        class="material-symbols-outlined text-gray-300"
+        v-if="isTimerRunning"
+        @click="stopTimer"
+      >
+        pause
+      </span>
+    </div> -->
+    <div
+      class="absolute z-0 top-0 left-0 h-1 bg-primary"
+      :style="{ width: `${graphAdvancement}%` }"
+    ></div>
+    <!-- <div class="absolute z-50 top-4 right-4">
       <Button @click="step--">Previous</Button>
       <Button @click="step++">Next</Button>
-    </div>
+    </div> -->
     <div class="grid h-full py-8 place-items-center">
       <TheNumberOfMovies
         v-if="step === 1 && numberOfMoviesWatched"
