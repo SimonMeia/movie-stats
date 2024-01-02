@@ -28,7 +28,7 @@ let timer = ref(0)
 const isTimerRunning = ref(false)
 const graphDuration = ref(6000)
 const graphAdvancement = computed(() => (timer.value * 100) / graphDuration.value)
-const step = ref(10)
+const step = ref(1)
 
 let timerInterval = ref<NodeJS.Timeout | undefined>(undefined)
 
