@@ -2,6 +2,7 @@
 import TheNumberOfMovies from '@/components/story/TheNumberOfMovies.vue'
 import TheBestGenre from '@/components/story/TheBestGenre.vue'
 import TheMonthsViewings from '@/components/story/TheMonthsViewings.vue'
+import TheTimeSpent from '@/components/story/TheTimeSpent.vue'
 import TheAverageRuntime from '@/components/story/TheAverageRuntime.vue'
 import TheLongestShortest from '@/components/story/TheLongestShortest.vue'
 import TheBestPartner from '@/components/story/TheBestPartner.vue'
@@ -16,7 +17,8 @@ import { useTopStatistics } from '@/composables/useTopStatistics'
 import { useMovies } from '@/composables/useMovies'
 import router from '@/router'
 
-const { numberOfMoviesWatched, averageMovieRuntime, longestMovie, shortestMovie } = useStatistics()
+const { numberOfMoviesWatched, timeSpent, averageMovieRuntime, longestMovie, shortestMovie } =
+  useStatistics()
 const { topMonths, topPartners, topGenres, topPlaces } = useTopStatistics()
 const { sortedMovies } = useMovies()
 
@@ -26,13 +28,13 @@ let timer = ref(0)
 const isTimerRunning = ref(false)
 const graphDuration = ref(6000)
 const graphAdvancement = computed(() => (timer.value * 100) / graphDuration.value)
-const step = ref(1)
+const step = ref(10)
 
 let timerInterval = ref<NodeJS.Timeout | undefined>(undefined)
 
 function move(direction: 'forward' | 'back') {
   if (direction === 'forward') {
-    if (step.value === 9) {
+    if (step.value === 10) {
       router.push({ name: 'home' })
     } else {
       step.value++
@@ -48,7 +50,7 @@ function move(direction: 'forward' | 'back') {
 }
 
 onMounted(() => {
-  startTimer()
+  // startTimer()
 })
 
 onBeforeUnmount(() => {
@@ -77,13 +79,13 @@ function stopTimer() {
   <main class="container h-dvh">
     <div>
       <div
-        class="absolute top-0 left-0 h-full w-1/2"
+        class="absolute top-0 left-0 w-1/2 h-full"
         @click="move('back')"
         @pointerdown="stopTimer"
         @pointerup="startTimer"
       ></div>
       <div
-        class="absolute top-0 right-0 h-full w-1/2"
+        class="absolute top-0 right-0 w-1/2 h-full"
         @click="move('forward')"
         @pointerdown="stopTimer"
         @pointerup="startTimer"
@@ -91,14 +93,14 @@ function stopTimer() {
     </div>
     <!-- <div class="absolute top-4 right-4">
       <span
-        class="material-symbols-outlined text-gray-300"
+        class="text-gray-300 material-symbols-outlined"
         v-if="!isTimerRunning"
         @click="startTimer"
       >
         play_arrow
       </span>
       <span
-        class="material-symbols-outlined text-gray-300"
+        class="text-gray-300 material-symbols-outlined"
         v-if="isTimerRunning"
         @click="stopTimer"
       >
@@ -106,7 +108,7 @@ function stopTimer() {
       </span>
     </div> -->
     <div
-      class="absolute z-0 top-0 left-0 h-1 bg-primary"
+      class="absolute top-0 left-0 z-0 h-1 bg-primary"
       :style="{ width: `${graphAdvancement}%` }"
     ></div>
     <!-- <div class="absolute z-50 top-4 right-4">
@@ -118,10 +120,7 @@ function stopTimer() {
         v-if="step === 1 && numberOfMoviesWatched"
         :value="numberOfMoviesWatched"
       ></TheNumberOfMovies>
-      <TheBestGenre
-        v-if="step === 2 && topGenres.length !== 0"
-        :top-genres="topGenres"
-      ></TheBestGenre>
+      <TheTimeSpent v-if="step === 2 && timeSpent" :time-spent="timeSpent"></TheTimeSpent>
       <TheAverageRuntime
         v-if="step === 3 && averageMovieRuntime"
         :runtime="averageMovieRuntime"
@@ -139,9 +138,13 @@ function stopTimer() {
         v-if="step === 6 && topPartners.length !== 0"
         :top-partners="topPartners"
       ></TheBestPartner>
-      <TheBestPlace v-if="step === 7 && topPlaces.length !== 0" :top-places="topPlaces" />
-      <TheGrades v-if="step === 8 && sortedMovies.length !== 0" :movies="sortedMovies" />
-      <TheBestMovies v-if="step === 9 && sortedMovies.length !== 0" :movies="sortedMovies" />
+      <TheBestGenre
+        v-if="step === 7 && topGenres.length !== 0"
+        :top-genres="topGenres"
+      ></TheBestGenre>
+      <TheBestPlace v-if="step === 8 && topPlaces.length !== 0" :top-places="topPlaces" />
+      <TheGrades v-if="step === 9 && sortedMovies.length !== 0" :movies="sortedMovies" />
+      <TheBestMovies v-if="step === 10 && sortedMovies.length !== 0" :movies="sortedMovies" />
     </div>
   </main>
 </template>

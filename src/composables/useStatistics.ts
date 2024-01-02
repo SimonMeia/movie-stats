@@ -32,6 +32,23 @@ export function useStatistics() {
     }
   })
 
+  const timeSpent = computed(() => {
+    if (sortedMovies.value.length === 0) {
+      return undefined
+    } else {
+      const total = sortedMovies.value
+        .map((movie: Movie) => movie.runtime)
+        .reduce((a: number, b: number) => a + b, 0)
+      const totalHours = total / 60
+      const totalDays = totalHours / 24
+      return {
+        minutes: `${total} minutes`,
+        hours: getFormattedDuration(total),
+        days: `${Math.round(totalDays * 10) / 10} days`
+      }
+    }
+  })
+
   const mostRecentMovie = computed(() => {
     return [...sortedMovies.value].sort(
       (a, b) => b.release_date.getTime() - a.release_date.getTime()
@@ -50,6 +67,7 @@ export function useStatistics() {
     longestMovie,
     shortestMovie,
     averageMovieRuntime,
+    timeSpent,
     mostOldMovie,
     mostRecentMovie
   }
